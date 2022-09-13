@@ -59,7 +59,23 @@ Position yourself in the local directory in which you want to position the sourc
 - Add user to your postgresql instance
 
 You can help yourself with this [document](https://djangocentral.com/using-postgresql-with-django/).
+- I performed the following actions
+Change the authentication method of postgresql into /etc/postgresql/{your postgresql version}/{your cluster}/pg_hba.conf
+in order to have this sentence "local   all             all                                     md5"
+- restart postgresql
+```bash
+sudo su - posgres
+```
+``` psql
+create user EPIC with createdb;
+alter user EPIC with password 'EPIC_PASSWORD';
+create database EPIC with owner = EPIC;
 
+``` 
+```bash
+django-admin startproject epic
+
+```
 - In the settings's file change key's values , for example
 ``` python
  SECRET_KEY = "django-insecure-ceciestmasecretkeymouahahh"
@@ -74,12 +90,9 @@ You can help yourself with this [document](https://djangocentral.com/using-postg
     }
 }
 ```
-- in terminal, go to in directory which containing manage.py
-- if you do not want to use the default database, you can: 
-  - generate database and populate it
-  - create superuser -> answer questions
+
 ``` bash
- python manage.py migrate --run-syncdb
+ [TODO]add migrate
  python manage.py createsuperuser 
 ```
 - start development server 

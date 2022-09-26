@@ -89,7 +89,7 @@ create database EPIC with owner = EPIC;
 ```
 
 ``` bash
- [TODO]add migrate
+ python manage.py migrate
  python manage.py createsuperuser 
 ```
 - start development server 

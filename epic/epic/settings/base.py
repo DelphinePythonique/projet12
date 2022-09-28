@@ -19,13 +19,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -75,17 +72,7 @@ WSGI_APPLICATION = "epic.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-SECRET_KEY = "django-insecure-ceciestmasecretkeymouahahh"
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'epic',
-        'USER': 'epic',
-        'PASSWORD': 'EPIC_PASSWORD',
-        'HOST': 'localhost',
-        'PORT': '45432',
-    }
-}
+
 
 
 # Password validation

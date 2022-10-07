@@ -1,5 +1,4 @@
-from .base import *  # noqa type:ignore
-
+from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

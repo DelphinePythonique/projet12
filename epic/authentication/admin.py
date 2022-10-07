@@ -11,10 +11,17 @@ from .models import User
 class UserAdmin(BaseUserAdmin):
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(UserAdmin, self).get_fieldsets(request, obj)
-        if "management_team" in request.user.groups.all().values_list(
+        if not "management_team" in request.user.groups.all().values_list(
             "name", flat=True
         ):
-            fields_to_remove = {
+            return fieldsets
+
+        if (
+            "management_team"
+            in request.user.groups.all().values_list("name", flat=True)
+            and not request.user.is_superuser
+        ):
+            fields_to_remove_by_fieldset = {
                 _("Personal info"): ("first_name",),
                 _("Permissions"): (
                     "user_permissions",
@@ -22,18 +29,23 @@ class UserAdmin(BaseUserAdmin):
                 ),
             }
             new_fieldsets_dict = {}
+            fieldset_with_change = fields_to_remove_by_fieldset.keys()
+            for fieldset_name, fieldset_opts in fieldsets:
+                if fieldset_name not in fieldset_with_change:
+                    new_fieldsets_dict[fieldset_name] = fieldset_opts
 
-            for name, opts in fieldsets:
-                if name not in fields_to_remove.keys():
-                    new_fieldsets_dict[name] = opts
-                else:
-                    list_fields = list(opts["fields"])
-                    for field_to_remove in fields_to_remove[name]:
-                        list_fields.remove(field_to_remove)
-                    new_fieldsets_dict[name] = {"fields": tuple(list_fields)}
-            fieldsets = tuple(
-                [(key, value) for key, value in new_fieldsets_dict.items()]
-            )
+                if fieldset_name in fieldset_with_change:
+                    field_to_remove = fields_to_remove_by_fieldset[fieldset_name]
+                    filtered_fields = [
+                        field
+                        for field in fieldset_opts["fields"]
+                        if field not in field_to_remove
+                    ]
+
+                    new_fieldsets_dict[fieldset_name] = {
+                        "fields": tuple(filtered_fields)
+                    }
+            return tuple([(key, value) for key, value in new_fieldsets_dict.items()])
         return fieldsets
 
 

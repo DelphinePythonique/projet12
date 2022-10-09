@@ -1,9 +1,9 @@
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.test import TestCase, Client
 
-# Create your tests here.
+
+User = get_user_model()
 
 
 def mocked_super_get_fieldsets():
@@ -27,40 +27,42 @@ def mocked_super_get_fieldsets():
 
 
 class TestUserAdmin(TestCase):
-    def setUp(self):
-        User = get_user_model()
-        admin = User.objects.create(
-            username="admin", password="admin", is_superuser=True, is_active=True
+    @classmethod
+    def setUpTestData(cls):
+
+        cls.superuser= User.objects.create_superuser(
+            username="admin", password="admin"
         )
 
-        manager_user = User.objects.create(
+        cls.manager_user = User.objects.create_user(
             username="management", password="admin", is_active=True, is_staff=True
         )
         management_team_group = Group.objects.get(name="management_team")
-        management_team_group.user_set.add(manager_user)
+        management_team_group.user_set.add(cls.manager_user)
 
-        sale_user = User.objects.create(
+        cls.sale_user = User.objects.create_user(
             username="sales", password="admin", is_active=True, is_staff=True
         )
         management_team_group = Group.objects.get(name="sales_team")
-        management_team_group.user_set.add(sale_user)
+        management_team_group.user_set.add(cls.sale_user)
 
-        support_user = User.objects.create(
+        cls.support_user = User.objects.create_user(
             username="supports", password="admin", is_active=True, is_staff=True
         )
         management_team_group = Group.objects.get(name="support_team")
-        management_team_group.user_set.add(support_user)
+        management_team_group.user_set.add(cls.support_user)
 
     def test_get_fieldsets(self):
-        c = Client()
-        c.login(username="admin", password="admin")
+        client = Client()
 
-        response = c.get("/admin/authentication/user/1/change/", follow=True)
-        self.assertRedirects(
-            response,
-            "/admin/login/?next=%2Fadmin%2Fauthentication%2Fuser%2F1%2Fchange%2F",
-            302,
-            200,
-            fetch_redirect_response=True,
-        )
-        self.assertContains(response.content, 'id')
+        client.force_login(TestUserAdmin.superuser)
+        response = client.get("/admin/authentication/user/1/change/")
+        self.assertEqual(response.status_code, 200)
+        html_response = response.content.decode("utf-8")
+        self.assertIn("id_is_superuser", html_response)
+
+        client.force_login(TestUserAdmin.superuser)
+        response = client.get("/admin/authentication/user/1/change/")
+        self.assertEqual(response.status_code, 200)
+        html_response = response.content.decode("utf-8")
+        self.assertIn("id_is_superuser", html_response)

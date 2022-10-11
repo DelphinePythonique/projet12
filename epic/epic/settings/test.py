@@ -10,7 +10,7 @@ SECRET_KEY = "django-insecure-ceciestmasecretkeymouahahh"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'epic_test',
+        'NAME': 'test_test_epic_test',
         'USER': 'epic',
         'PASSWORD': 'EPIC_PASSWORD',
         'HOST': 'localhost',

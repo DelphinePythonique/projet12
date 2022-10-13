@@ -17,6 +17,20 @@ class Customer(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
+    @property
+    def contracts(self):
+        return self.contract_to.all()
+
+    @property
+    def events(self):
+        return self.organise.all()
+
+    @property
+    def contributors(self):
+        sales_contacts = [contract.sales_contact for contract in self.contracts]
+        support_contacts = [event.sales_contact for event in self.events]
+        return list(set(support_contacts) + set(sales_contacts))
+
 
 class Status(models.Model):
     name = models.CharField(max_length=25)
@@ -27,7 +41,11 @@ class Contract(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True
     )
     customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, null=True, blank=True
+        Customer,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="contract_to",
     )
     status = models.BooleanField(null=True, blank=True)
     amount = models.FloatField(default=0)
@@ -41,7 +59,11 @@ class Event(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True
     )
     customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, null=True, blank=True
+        Customer,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="organise",
     )
     status = models.ForeignKey(Status, on_delete=models.SET_NULL, null=True, blank=True)
     attendees = models.PositiveIntegerField(default=0)

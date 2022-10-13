@@ -25,7 +25,6 @@ def add_or_remove_permissions_for_group(action, apps, group, permissions_codenam
     Group_ = apps.get_model("auth", "Group")
     Permission_ = apps.get_model("auth", "Permission")
 
-    Permission
     try:
         group = Group_.objects.get(name=group)
     except ObjectDoesNotExist:

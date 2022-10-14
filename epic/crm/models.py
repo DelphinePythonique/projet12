@@ -17,6 +17,9 @@ class Customer(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
     @property
     def contracts(self):
         return self.contract_to.all()
@@ -34,6 +37,9 @@ class Customer(models.Model):
 
 class Status(models.Model):
     name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Contract(models.Model):
@@ -53,6 +59,9 @@ class Contract(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     payment_due = models.DateTimeField(null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.customer} {self.date_created}"
+
 
 class Event(models.Model):
     support_contact = models.ForeignKey(
@@ -71,3 +80,6 @@ class Event(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     event_date = models.DateTimeField(null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.customer} - {self.event_date}"

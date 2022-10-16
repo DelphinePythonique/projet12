@@ -1,5 +1,4 @@
 from django.db.models import Q
-from importlib._common import _
 
 from django.contrib import admin
 
@@ -8,11 +7,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
 from .models import Status, Customer, Contract, Event
+from .permissions import permissions_filter_on_customer, is_change_authorized
 
 User = get_user_model()
 
 
 class CustomerAdmin(admin.ModelAdmin):
+    list_display = ("first_name", "last_name", "sales_contact")
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         sales_group = Group.objects.filter(name="sales_team")[0]
         if db_field.name == "sales_contact":
@@ -21,13 +23,14 @@ class CustomerAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        return qs.filter(
-            Q(sales_contact=request.user)
-            | Q(contract_to__sales_contact=request.user)
-            | Q(organise__support_contact=request.user)
-        )
+        return permissions_filter_on_customer(qs, request)
+
+    def has_change_permission(self, request, obj=None):
+        allowed = super().has_change_permission(request, obj)
+
+        if obj is None:
+            return allowed
+        return is_change_authorized(request, obj)
 
 
 admin.site.register(Customer, CustomerAdmin)
@@ -36,7 +39,6 @@ admin.site.register(Status)
 
 
 class ContractAdmin(admin.ModelAdmin):
-
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         sales_group = Group.objects.filter(name="sales_team")[0]
         if db_field.name == "sales_contact":
@@ -48,9 +50,7 @@ class ContractAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.filter(
-            Q(sales_contact=request.user)
-            | Q(customer__sales_contact=request.user)
-          
+            Q(sales_contact=request.user) | Q(customer__sales_contact=request.user)
         )
 
 
@@ -68,6 +68,7 @@ class EventAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
+
         return qs.filter(
             Q(support_contact=request.user)
             | Q(customer__sales_contact=request.user)

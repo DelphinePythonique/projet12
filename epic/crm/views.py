@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import GenericViewSet
 
+from .permissions import permissions_filter_on_customer
 from .serializers import CustomerListSerializer, CustomerDetailSerializer
 
 from .models import Customer
@@ -33,6 +34,7 @@ class CustomerViewset(
     delete a customer
 
     """
+
     schema = AutoSchema(
         tags=["customer", "crm"],
         component_name="Customer",
@@ -41,7 +43,8 @@ class CustomerViewset(
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
 
-
     def get_queryset(self):
-
-        return Customer.objects.all()
+        customer_queryset_with_permissions = permissions_filter_on_customer(
+            Customer.objects.all(), self.request.user
+        )
+        return customer_queryset_with_permissions

@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import mixins
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import GenericViewSet
 
@@ -45,12 +45,7 @@ class CustomerViewset(
     )
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
-
-    def get_permissions(self):
-
-        if self.action in ("update", "partial_update"):
-            self.permission_classes.append(IsOwner)
-        return super().get_permissions()
+    permission_classes = [IsAuthenticated & ( DjangoModelPermissions |  IsOwner)]
 
     def get_queryset(self):
         customer_queryset_with_permissions = permissions_filter_on_customer(

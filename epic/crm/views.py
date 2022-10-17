@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import GenericViewSet
 
-from .permissions import permissions_filter_on_customer
+from .permissions import permissions_filter_on_customer, IsOwner
 from .serializers import CustomerListSerializer, CustomerDetailSerializer
 
 from .models import Customer
@@ -14,6 +14,7 @@ from .models import Customer
 
 class CustomerViewset(
     mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,
     mixins.ListModelMixin,
@@ -29,6 +30,8 @@ class CustomerViewset(
     retrieve:
     Return a customer .
 
+    update:
+    update a customer
 
     destroy:
     delete a customer
@@ -43,8 +46,14 @@ class CustomerViewset(
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
 
+    def get_permissions(self):
+
+        if self.action in ("update", "partial_update"):
+            self.permission_classes.append(IsOwner)
+        return super().get_permissions()
+
     def get_queryset(self):
         customer_queryset_with_permissions = permissions_filter_on_customer(
-            Customer.objects.all(), self.request.user
+            Customer.objects.all(), self.request
         )
         return customer_queryset_with_permissions

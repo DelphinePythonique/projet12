@@ -7,7 +7,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
 from .models import Status, Customer, Contract, Event
-from .permissions import permissions_filter_on_customer, is_change_authorized
+from .permissions import permissions_filter_on_customer, is_change_authorized, permissions_filter_on_contract, \
+    permissions_filter_on_event
 
 User = get_user_model()
 
@@ -47,11 +48,14 @@ class ContractAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        return qs.filter(
-            Q(sales_contact=request.user) | Q(customer__sales_contact=request.user)
-        )
+        return permissions_filter_on_contract(qs, request)
+
+    def has_change_permission(self, request, obj=None):
+        allowed = super().has_change_permission(request, obj)
+
+        if obj is None:
+            return allowed
+        return is_change_authorized(request, obj)
 
 
 admin.site.register(Contract, ContractAdmin)
@@ -66,14 +70,14 @@ class EventAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser:
-            return qs
+        return permissions_filter_on_event(qs, request)
 
-        return qs.filter(
-            Q(support_contact=request.user)
-            | Q(customer__sales_contact=request.user)
-            | Q(customer__contract_to__sales_contact=request.user)
-        )
+    def has_change_permission(self, request, obj=None):
+        allowed = super().has_change_permission(request, obj)
+
+        if obj is None:
+            return allowed
+        return is_change_authorized(request, obj)
 
 
 admin.site.register(Event, EventAdmin)

@@ -19,6 +19,28 @@ def permissions_filter_on_customer(customer_queryset, request):
     )
 
 
+def permissions_filter_on_contract(contract_queryset, request):
+    group_ = Group.objects.filter(name="management_team")[0]
+    if group_ in request.user.groups.all():
+        return contract_queryset
+    if request.user.is_superuser:
+        return contract_queryset
+
+    return contract_queryset.filter(
+        Q(sales_contact=request.user) | Q(customer__sales_contact=request.user)
+    )
+
+
+def permissions_filter_on_event(event_queryset, request):
+    group_ = Group.objects.filter(name="management_team")[0]
+    if group_ in request.user.groups.all():
+        return event_queryset
+    if request.user.is_superuser:
+        return event_queryset
+
+    return event_queryset.filter(Q(support_contact=request.user))
+
+
 def is_change_authorized(request, obj):
     group_ = Group.objects.filter(name="management_team")[0]
     if group_ in request.user.groups.all():
@@ -34,7 +56,7 @@ def is_owner(request, obj):
     if isinstance(obj, Customer):
         return obj.sales_contact == request.user
     if isinstance(obj, Contract):
-        return obj.sales_contact == request.user
+        return (obj.sales_contact == request.user) | (obj.customer.sales_contact == request.user)
     if isinstance(obj, Event):
         return obj.support_contact == request.user
 

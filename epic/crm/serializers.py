@@ -18,6 +18,7 @@ class CustomerListSerializer(ModelSerializer):
             "first_name",
             "last_name",
             "sales_contact",
+            "email",
         ]
 
     def validate_sales_contact(self, user):
@@ -49,6 +50,9 @@ class ContractListSerializer(ModelSerializer):
         slug_field="username",
     )
 
+    customer = serializers.ReadOnlyField(source="customer.last_name")
+    status = serializers.ReadOnlyField(source="status.name")
+
     class Meta:
         model = Contract
         fields = [
@@ -69,6 +73,8 @@ class ContractListSerializer(ModelSerializer):
 
 
 class ContractDetailSerializer(ModelSerializer):
+
+
     class Meta:
         model = Contract
         fields = [
@@ -85,12 +91,16 @@ class EventListSerializer(ModelSerializer):
         queryset=get_user_model().objects.filter(groups__name="support_team"),
         slug_field="username",
     )
+    customer__last_name = serializers.ReadOnlyField(source="customer.last_name")
+    customer__email = serializers.ReadOnlyField(source="customer.email")
+    status = serializers.ReadOnlyField(source="status.name")
 
     class Meta:
         model = Event
         fields = [
             "support_contact",
-            "customer",
+            "customer__last_name",
+            "customer__email",
             "status",
             "attendees",
             "event_date",

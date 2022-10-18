@@ -3,3 +3,4 @@ djangorestframework-simplejwt
 drf-extensions
 uritemplate
 pyyaml
+django-filter

@@ -16,7 +16,7 @@ def permissions_filter_on_customer(customer_queryset, request):
         Q(sales_contact=request.user)
         | Q(contract_to__sales_contact=request.user)
         | Q(organise__support_contact=request.user)
-    )
+    ).distinct()
 
 
 def permissions_filter_on_contract(contract_queryset, request):
@@ -28,7 +28,7 @@ def permissions_filter_on_contract(contract_queryset, request):
 
     return contract_queryset.filter(
         Q(sales_contact=request.user) | Q(customer__sales_contact=request.user)
-    )
+    ).distinct()
 
 
 def permissions_filter_on_event(event_queryset, request):
@@ -38,7 +38,7 @@ def permissions_filter_on_event(event_queryset, request):
     if request.user.is_superuser:
         return event_queryset
 
-    return event_queryset.filter(Q(support_contact=request.user))
+    return event_queryset.filter(Q(support_contact=request.user)).distinct()
 
 
 def is_change_authorized(request, obj):

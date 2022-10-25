@@ -1,7 +1,7 @@
 
 # Create your views here.
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins
+from rest_framework import mixins, filters
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import GenericViewSet
@@ -56,8 +56,12 @@ class CustomerViewset(
     )
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['last_name', 'email']
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+    ]
+    #filterset_fields = ['last_name', 'email']
+    search_fields = ['last_name', 'email']
     permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
 
     def get_queryset(self):
@@ -101,8 +105,8 @@ class ContractViewset(
     serializer_class = ContractListSerializer
     detail_serializer_class = ContractDetailSerializer
     permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["customer__last_name", "customer__email", "date_created", "amount"]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter,]
+    search_fields = ["customer__last_name", "customer__email", "date_created", "amount"]
 
     def get_queryset(self):
         contract_queryset_with_permissions = permissions_filter_on_contract(
@@ -145,8 +149,8 @@ class EventViewset(
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
     permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["customer__last_name", "customer__email", "event_date"]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter,]
+    search_fields = ["customer__last_name", "customer__email", "event_date"]
 
     def get_queryset(self):
         event_queryset_with_permissions = permissions_filter_on_event(

@@ -20,6 +20,12 @@ paths:
         description: The initial index from which to return the results.
         schema:
           type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -84,6 +90,12 @@ paths:
         description: ''
         schema:
           type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -102,6 +114,12 @@ paths:
         in: path
         required: true
         description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
         schema:
           type: string
       requestBody:
@@ -135,6 +153,12 @@ paths:
         description: ''
         schema:
           type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -166,11 +190,415 @@ paths:
         description: ''
         schema:
           type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
       responses:
         '204':
           description: ''
       tags:
       - customer
+      - crm
+  /api/contract/:
+    get:
+      operationId: listContracts
+      description: Return the list of contracts
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/contract'
+          description: ''
+      tags:
+      - contract
+      - crm
+    post:
+      operationId: createContract
+      description: add a contract.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contract'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/contract'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/contract'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contract'
+          description: ''
+      tags:
+      - contract
+      - crm
+  /api/contract/{id}/:
+    get:
+      operationId: retrieveContract
+      description: Return a contract .
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contract'
+          description: ''
+      tags:
+      - contract
+      - crm
+    put:
+      operationId: updateContract
+      description: update a contract
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contract'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/contract'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/contract'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contract'
+          description: ''
+      tags:
+      - contract
+      - crm
+    patch:
+      operationId: partialUpdateContract
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contract'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/contract'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/contract'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contract'
+          description: ''
+      tags:
+      - contract
+      - crm
+    delete:
+      operationId: destroyContract
+      description: delete a contract
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - contract
+      - crm
+  /api/event/:
+    get:
+      operationId: listevents
+      description: Return the list of events
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/event'
+          description: ''
+      tags:
+      - event
+      - crm
+    post:
+      operationId: createevent
+      description: add an event.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/event'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/event'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/event'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+          description: ''
+      tags:
+      - event
+      - crm
+  /api/event/{id}/:
+    get:
+      operationId: retrieveevent
+      description: Return an event.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+          description: ''
+      tags:
+      - event
+      - crm
+    put:
+      operationId: updateevent
+      description: update an event.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/event'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/event'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/event'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+          description: ''
+      tags:
+      - event
+      - crm
+    patch:
+      operationId: partialUpdateevent
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/event'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/event'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/event'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+          description: ''
+      tags:
+      - event
+      - crm
+    delete:
+      operationId: destroyevent
+      description: delete an event.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - event
       - crm
   /api/token/refresh/:
     post:
@@ -240,11 +668,58 @@ components:
           type: string
           maxLength: 25
         sales_contact:
-          type: integer
+          type: string
+        email:
+          type: string
           nullable: true
+          maxLength: 100
       required:
       - first_name
       - last_name
+      - sales_contact
+    contract:
+      type: object
+      properties:
+        sales_contact:
+          type: string
+        customer:
+          type: string
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        amount:
+          type: number
+        payment_due:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - sales_contact
+    event:
+      type: object
+      properties:
+        support_contact:
+          type: string
+        customer__last_name:
+          type: string
+          readOnly: true
+        customer__email:
+          type: string
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        attendees:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        event_date:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - support_contact
     TokenRefresh:
       type: object
       properties:

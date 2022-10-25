@@ -73,8 +73,6 @@ class ContractListSerializer(ModelSerializer):
 
 
 class ContractDetailSerializer(ModelSerializer):
-
-
     class Meta:
         model = Contract
         fields = [
@@ -110,7 +108,7 @@ class EventListSerializer(ModelSerializer):
         group_ = Group.objects.get(name="support_team")
 
         if group_ not in user.groups.all():
-            message = f"User mut be in the {group_.name}."
+            message = f"User must be in the {group_.name}."
             raise serializers.ValidationError(message)
         return user
 

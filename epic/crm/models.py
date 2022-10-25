@@ -2,6 +2,11 @@ from django.conf import settings
 from django.db import models
 
 # Create your models here.
+STATUS_CONTRACT = [
+    ("S", "Sign"),
+    ("QS", "Quote sent"),
+    ("P", "In progress"),
+]
 
 
 class Customer(models.Model):
@@ -28,12 +33,6 @@ class Customer(models.Model):
     def events(self):
         return self.organise.all()
 
-    @property
-    def contributors(self):
-        sales_contacts = [contract.sales_contact for contract in self.contracts]
-        support_contacts = [event.sales_contact for event in self.events]
-        return list(set(support_contacts) + set(sales_contacts))
-
 
 class Status(models.Model):
     name = models.CharField(max_length=25)
@@ -53,7 +52,7 @@ class Contract(models.Model):
         blank=True,
         related_name="contract_to",
     )
-    status = models.BooleanField(null=True, blank=True)
+    status = models.CharField(max_length=3, default="P", choices=STATUS_CONTRACT)
     amount = models.FloatField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

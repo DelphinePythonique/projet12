@@ -1,7 +1,6 @@
 from .base import *  # noqa type:ignore
 
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -10,12 +9,12 @@ ALLOWED_HOSTS = []
 SECRET_KEY = "django-insecure-ceciestmasecretkeymouahahh"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'epic_dev',
-        'USER': 'epic',
-        'PASSWORD': 'EPIC_PASSWORD',
-        'HOST': 'localhost',
-        'PORT': '45432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "epic_dev",
+        "USER": "epic",
+        "PASSWORD": "EPIC_PASSWORD",
+        "HOST": "localhost",
+        "PORT": "45432",
     }
 }

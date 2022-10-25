@@ -21,14 +21,20 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from crm.views import CustomerViewset, ContractViewset, EventViewset
 
 router = routers.SimpleRouter()
-router.register('customer', CustomerViewset, basename='crm')
-router.register('contract', ContractViewset, basename='crm')
-router.register('event', EventViewset, basename='crm')
+router.register("customer", CustomerViewset, basename="crm")
+router.register("contract", ContractViewset, basename="crm")
+router.register("event", EventViewset, basename="crm")
+
+
+def trigger_error(request):
+    division_by_zero = 1 / 0  # noqa
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/", include(router.urls))
+    path("api/", include(router.urls)),
+    path("sentry-debug/", trigger_error),
 ]

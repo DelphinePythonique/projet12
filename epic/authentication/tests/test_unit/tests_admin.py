@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.models import Group
 from django.test import TestCase, Client
 
 
@@ -56,17 +56,12 @@ class TestUserAdmin(TestCase):
         support_team_group.save()
 
     def test_get_fieldsets(self):
-        users = User.objects.all()
-
         client = Client()
-        permission_manager = Permission.objects.all()
         client.force_login(TestUserAdmin.superuser)
         response = client.get("/admin/authentication/user/1/change/")
         self.assertEqual(response.status_code, 200)
         html_response = response.content.decode("utf-8")
         self.assertIn("id_is_superuser", html_response)
-        groups = TestUserAdmin.manager_user.groups.all()
-        permissions = groups[0].permissions.all()
         client.force_login(TestUserAdmin.manager_user)
         response = client.get("/admin/authentication/user/1/change/")
         self.assertEqual(response.status_code, 200)

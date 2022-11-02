@@ -15,6 +15,7 @@ class CustomerListSerializer(ModelSerializer):
     class Meta:
         model = Customer
         fields = [
+            "id",
             "first_name",
             "last_name",
             "sales_contact",
@@ -50,15 +51,18 @@ class ContractListSerializer(ModelSerializer):
         slug_field="username",
     )
 
-    customer = serializers.ReadOnlyField(source="customer.last_name")
-    status = serializers.ReadOnlyField(source="status.name")
+    customer_lastname = serializers.ReadOnlyField(source="customer.last_name")
+    status_name = serializers.ReadOnlyField(source="status.name")
 
     class Meta:
         model = Contract
         fields = [
-            "sales_contact",
+            "id",
             "customer",
+            "sales_contact",
+            "customer_lastname",
             "status",
+            "status_name",
             "amount",
             "payment_due",
         ]
@@ -96,6 +100,7 @@ class EventListSerializer(ModelSerializer):
     class Meta:
         model = Event
         fields = [
+            "id",
             "support_contact",
             "customer__last_name",
             "customer__email",

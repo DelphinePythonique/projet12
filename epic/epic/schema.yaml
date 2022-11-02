@@ -1021,17 +1021,23 @@ components:
     Customer:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         first_name:
           type: string
+          description: customer's firstname
           maxLength: 25
         last_name:
           type: string
+          description: customer's lastname
           maxLength: 25
         sales_contact:
           type: string
         email:
           type: string
           nullable: true
+          description: customer's email
           maxLength: 100
       required:
       - first_name
@@ -1040,25 +1046,45 @@ components:
     contract:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
+        customer:
+          type: integer
+          description: contract's customer
         sales_contact:
           type: string
-        customer:
+        customer_lastname:
           type: string
           readOnly: true
         status:
+          enum:
+          - S
+          - QS
+          - P
+          type: string
+          description: This field is used to categorize the project. Use, S=>Sign,
+            QS=>Quote sent, P=>In progress
+        status_name:
           type: string
           readOnly: true
         amount:
           type: number
+          description: contract's amount
         payment_due:
           type: string
           format: date-time
           nullable: true
+          description: contract's paiement due date
       required:
+      - customer
       - sales_contact
     event:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         support_contact:
           type: string
         customer__last_name:
@@ -1073,11 +1099,13 @@ components:
         attendees:
           type: integer
           maximum: 2147483647
+          description: event's number of attendees
           minimum: 0
         event_date:
           type: string
           format: date-time
           nullable: true
+          description: event's date
       required:
       - support_contact
     TokenRefresh:

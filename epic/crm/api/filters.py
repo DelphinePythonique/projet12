@@ -1,5 +1,3 @@
-from django.contrib import admin
-
 from django_filters import rest_framework as filters
 
 from crm.models import Customer, Contract

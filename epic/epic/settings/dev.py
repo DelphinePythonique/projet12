@@ -1,5 +1,5 @@
 from .base import *  # noqa type:ignore
-
+from .base import MIDDLEWARE, INSTALLED_APPS, BASE_DIR
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

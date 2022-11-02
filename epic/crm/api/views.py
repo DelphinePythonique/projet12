@@ -148,10 +148,9 @@ class EventViewset(
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
     permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
-    #filter_backends = [
+
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = EventFilter
-    #search_fields = ["customer__last_name", "customer__email", "event_date"]
 
     def get_queryset(self):
         event_queryset_with_permissions = permissions_filter_on_event(

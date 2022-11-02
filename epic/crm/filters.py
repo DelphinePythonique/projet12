@@ -14,7 +14,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_str
 from django.template.defaultfilters import slugify
-from django.contrib.admin.widgets import AdminSplitDateTime, AdminDateWidget
+from django.contrib.admin.widgets import AdminDateWidget
 from django.templatetags.static import StaticNode
 
 

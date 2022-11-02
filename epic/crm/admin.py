@@ -11,13 +11,15 @@ from .permissions import (
     permissions_filter_on_contract,
     permissions_filter_on_event,
 )
+from .filters import TextFilter, NumericRangeFilter, DateRangeFilter
 
 User = get_user_model()
 
 
 class CustomerAdmin(admin.ModelAdmin):
+
     list_display = ("first_name", "last_name", "email", "sales_contact")
-    search_fields = ("last_name", "email")
+    list_filter = (("last_name", TextFilter), ("email", TextFilter))
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         sales_group = Group.objects.filter(name="sales_team")[0]
@@ -44,7 +46,12 @@ admin.site.register(Status)
 
 class ContractAdmin(admin.ModelAdmin):
     list_display = ("customer", "sales_contact", "status", "amount", "payment_due")
-    search_fields = ("customer__last_name", "customer__email", "date_created", "amount")
+    list_filter = (
+        ("customer__last_name", TextFilter),
+        ("customer__email", TextFilter),
+        ("date_created", DateRangeFilter),
+        ("amount", NumericRangeFilter),
+    )
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         sales_group = Group.objects.filter(name="sales_team")[0]
@@ -69,7 +76,11 @@ admin.site.register(Contract, ContractAdmin)
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ("customer", "support_contact", "status", "attendees", "event_date")
-    search_fields = ("customer__last_name", "customer__email", "event_date")
+    list_filter = (
+        ("customer__last_name", TextFilter),
+        ("customer__email", TextFilter),
+        ("event_date", DateRangeFilter),
+    )
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         support_group = Group.objects.filter(name="support_team")[0]

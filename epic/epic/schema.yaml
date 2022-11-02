@@ -20,10 +20,16 @@ paths:
         description: The initial index from which to return the results.
         schema:
           type: integer
-      - name: search
+      - name: last_name
         required: false
         in: query
-        description: A search term.
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
         schema:
           type: string
       responses:
@@ -90,10 +96,16 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: last_name
         required: false
         in: query
-        description: A search term.
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
         schema:
           type: string
       responses:
@@ -116,10 +128,16 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: last_name
         required: false
         in: query
-        description: A search term.
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
         schema:
           type: string
       requestBody:
@@ -153,10 +171,16 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: last_name
         required: false
         in: query
-        description: A search term.
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
         schema:
           type: string
       requestBody:
@@ -190,10 +214,16 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: last_name
         required: false
         in: query
-        description: A search term.
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
         schema:
           type: string
       responses:
@@ -219,10 +249,52 @@ paths:
         description: The initial index from which to return the results.
         schema:
           type: integer
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: date_created
+        required: false
+        in: query
+        description: date_created
+        schema:
+          type: string
+      - name: amount
+        required: false
+        in: query
+        description: amount
+        schema:
+          type: string
+      - name: amount__gt
+        required: false
+        in: query
+        description: amount__gt
+        schema:
+          type: string
+      - name: amount__lt
+        required: false
+        in: query
+        description: amount__lt
+        schema:
+          type: string
+      - name: date_created__gte
+        required: false
+        in: query
+        description: date_created__gte
+        schema:
+          type: string
+      - name: date_created__lte
+        required: false
+        in: query
+        description: date_created__lte
         schema:
           type: string
       responses:
@@ -289,10 +361,52 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: date_created
+        required: false
+        in: query
+        description: date_created
+        schema:
+          type: string
+      - name: amount
+        required: false
+        in: query
+        description: amount
+        schema:
+          type: string
+      - name: amount__gt
+        required: false
+        in: query
+        description: amount__gt
+        schema:
+          type: string
+      - name: amount__lt
+        required: false
+        in: query
+        description: amount__lt
+        schema:
+          type: string
+      - name: date_created__gte
+        required: false
+        in: query
+        description: date_created__gte
+        schema:
+          type: string
+      - name: date_created__lte
+        required: false
+        in: query
+        description: date_created__lte
         schema:
           type: string
       responses:
@@ -315,10 +429,52 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: date_created
+        required: false
+        in: query
+        description: date_created
+        schema:
+          type: string
+      - name: amount
+        required: false
+        in: query
+        description: amount
+        schema:
+          type: string
+      - name: amount__gt
+        required: false
+        in: query
+        description: amount__gt
+        schema:
+          type: string
+      - name: amount__lt
+        required: false
+        in: query
+        description: amount__lt
+        schema:
+          type: string
+      - name: date_created__gte
+        required: false
+        in: query
+        description: date_created__gte
+        schema:
+          type: string
+      - name: date_created__lte
+        required: false
+        in: query
+        description: date_created__lte
         schema:
           type: string
       requestBody:
@@ -352,10 +508,52 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: date_created
+        required: false
+        in: query
+        description: date_created
+        schema:
+          type: string
+      - name: amount
+        required: false
+        in: query
+        description: amount
+        schema:
+          type: string
+      - name: amount__gt
+        required: false
+        in: query
+        description: amount__gt
+        schema:
+          type: string
+      - name: amount__lt
+        required: false
+        in: query
+        description: amount__lt
+        schema:
+          type: string
+      - name: date_created__gte
+        required: false
+        in: query
+        description: date_created__gte
+        schema:
+          type: string
+      - name: date_created__lte
+        required: false
+        in: query
+        description: date_created__lte
         schema:
           type: string
       requestBody:
@@ -389,10 +587,52 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: date_created
+        required: false
+        in: query
+        description: date_created
+        schema:
+          type: string
+      - name: amount
+        required: false
+        in: query
+        description: amount
+        schema:
+          type: string
+      - name: amount__gt
+        required: false
+        in: query
+        description: amount__gt
+        schema:
+          type: string
+      - name: amount__lt
+        required: false
+        in: query
+        description: amount__lt
+        schema:
+          type: string
+      - name: date_created__gte
+        required: false
+        in: query
+        description: date_created__gte
+        schema:
+          type: string
+      - name: date_created__lte
+        required: false
+        in: query
+        description: date_created__lte
         schema:
           type: string
       responses:
@@ -418,10 +658,34 @@ paths:
         description: The initial index from which to return the results.
         schema:
           type: integer
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: event_date
+        required: false
+        in: query
+        description: event_date
+        schema:
+          type: string
+      - name: event_date__gte
+        required: false
+        in: query
+        description: event_date__gte
+        schema:
+          type: string
+      - name: event_date__lte
+        required: false
+        in: query
+        description: event_date__lte
         schema:
           type: string
       responses:
@@ -488,10 +752,34 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: event_date
+        required: false
+        in: query
+        description: event_date
+        schema:
+          type: string
+      - name: event_date__gte
+        required: false
+        in: query
+        description: event_date__gte
+        schema:
+          type: string
+      - name: event_date__lte
+        required: false
+        in: query
+        description: event_date__lte
         schema:
           type: string
       responses:
@@ -514,10 +802,34 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: event_date
+        required: false
+        in: query
+        description: event_date
+        schema:
+          type: string
+      - name: event_date__gte
+        required: false
+        in: query
+        description: event_date__gte
+        schema:
+          type: string
+      - name: event_date__lte
+        required: false
+        in: query
+        description: event_date__lte
         schema:
           type: string
       requestBody:
@@ -551,10 +863,34 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: event_date
+        required: false
+        in: query
+        description: event_date
+        schema:
+          type: string
+      - name: event_date__gte
+        required: false
+        in: query
+        description: event_date__gte
+        schema:
+          type: string
+      - name: event_date__lte
+        required: false
+        in: query
+        description: event_date__lte
         schema:
           type: string
       requestBody:
@@ -588,10 +924,34 @@ paths:
         description: ''
         schema:
           type: string
-      - name: search
+      - name: customer__last_name
         required: false
         in: query
-        description: A search term.
+        description: customer__last_name
+        schema:
+          type: string
+      - name: customer__email
+        required: false
+        in: query
+        description: customer__email
+        schema:
+          type: string
+      - name: event_date
+        required: false
+        in: query
+        description: event_date
+        schema:
+          type: string
+      - name: event_date__gte
+        required: false
+        in: query
+        description: event_date__gte
+        schema:
+          type: string
+      - name: event_date__lte
+        required: false
+        in: query
+        description: event_date__lte
         schema:
           type: string
       responses:

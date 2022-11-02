@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from .models import Customer, Contract, Event
+from  crm.models import Customer, Contract, Event
 
 
 class CustomerListSerializer(ModelSerializer):

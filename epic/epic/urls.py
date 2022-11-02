@@ -13,12 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 
-from crm.views import CustomerViewset, ContractViewset, EventViewset
+from crm.api.views import CustomerViewset, ContractViewset, EventViewset
 
 router = routers.SimpleRouter()
 router.register("customer", CustomerViewset, basename="crm")
@@ -37,4 +39,11 @@ urlpatterns = [
     path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/", include(router.urls)),
     path("sentry-debug/", trigger_error),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns.extend([
+        path('__debug__/', include('debug_toolbar.urls')),
+    ])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

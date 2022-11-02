@@ -1,17 +1,19 @@
-
 # Create your views here.
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins, filters
+from django_filters import rest_framework as filters
+
+from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import GenericViewSet
 
-from .permissions import (
+from crm.api.filters import CustomerFilter, ContractFilter, EventFilter
+from crm.permissions import (
     permissions_filter_on_customer,
     IsOwner,
-    permissions_filter_on_contract, permissions_filter_on_event,
+    permissions_filter_on_contract,
+    permissions_filter_on_event,
 )
-from .serializers import (
+from crm.api.serializers import (
     CustomerListSerializer,
     CustomerDetailSerializer,
     ContractDetailSerializer,
@@ -20,7 +22,7 @@ from .serializers import (
     EventDetailSerializer,
 )
 
-from .models import Customer, Contract, Event
+from crm.models import Customer, Contract, Event
 
 
 class CustomerViewset(
@@ -56,12 +58,9 @@ class CustomerViewset(
     )
     serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
-    filter_backends = [
-        DjangoFilterBackend,
-        filters.SearchFilter,
-    ]
-    #filterset_fields = ['last_name', 'email']
-    search_fields = ['last_name', 'email']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = CustomerFilter
+
     permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
 
     def get_queryset(self):
@@ -105,8 +104,8 @@ class ContractViewset(
     serializer_class = ContractListSerializer
     detail_serializer_class = ContractDetailSerializer
     permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter,]
-    search_fields = ["customer__last_name", "customer__email", "date_created", "amount"]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = ContractFilter
 
     def get_queryset(self):
         contract_queryset_with_permissions = permissions_filter_on_contract(
@@ -149,8 +148,10 @@ class EventViewset(
     serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
     permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter,]
-    search_fields = ["customer__last_name", "customer__email", "event_date"]
+    #filter_backends = [
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = EventFilter
+    #search_fields = ["customer__last_name", "customer__email", "event_date"]
 
     def get_queryset(self):
         event_queryset_with_permissions = permissions_filter_on_event(

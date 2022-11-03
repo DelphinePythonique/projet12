@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from crm.models import Customer, Contract
+from .models import Customer, Contract, Event
 
 
 class CustomerFilter(filters.FilterSet):
@@ -48,5 +48,5 @@ class EventFilter(filters.FilterSet):
     )
 
     class Meta:
-        model = Contract
+        model = Event
         fields = ["customer__last_name", "customer__email", "event_date"]

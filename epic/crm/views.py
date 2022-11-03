@@ -75,8 +75,11 @@ class CustomerViewset(
         elif self.action in ("list", "retrieve"):
             self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
         else:
-            self.permission_classes = [IsAuthenticated]
+            self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
         return super().get_permissions()
+
+    def perform_create(self, serializer):
+        serializer.save(sales_contact=self.request.user)
 
 
 class ContractViewset(
@@ -128,7 +131,7 @@ class ContractViewset(
         elif self.action in ("list", "retrieve"):
             self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
         else:
-            self.permission_classes = [IsAuthenticated]
+            self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
         return super().get_permissions()
 
     def perform_create(self, serializer):
@@ -185,8 +188,5 @@ class EventViewset(
         elif self.action in ("list", "retrieve"):
             self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
         else:
-            self.permission_classes = [IsAuthenticated]
+            self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
         return super().get_permissions()
-
-    def perform_create(self, serializer):
-        serializer.save(support_contact=self.request.user)

@@ -7,10 +7,7 @@ from .models import Customer, Contract, Event
 
 
 class CustomerListSerializer(ModelSerializer):
-    sales_contact = serializers.SlugRelatedField(
-        queryset=get_user_model().objects.filter(groups__name="sales_team"),
-        slug_field="username",
-    )
+    sales_contact = serializers.ReadOnlyField(source="sales_contact.username")
 
     class Meta:
         model = Customer
@@ -48,11 +45,7 @@ class CustomerDetailSerializer(ModelSerializer):
 
 
 class ContractListSerializer(ModelSerializer):
-    sales_contact = serializers.SlugRelatedField(
-        queryset=get_user_model().objects.filter(groups__name="sales_team"),
-        slug_field="username",
-    )
-
+    sales_contact = serializers.ReadOnlyField(source="sales_contact.username")
     customer_lastname = serializers.ReadOnlyField(source="customer.last_name")
     status_name = serializers.ReadOnlyField(source="status.name")
 
@@ -93,10 +86,10 @@ class ContractDetailSerializer(ModelSerializer):
 
 
 class EventListSerializer(ModelSerializer):
-    support_contact = serializers.SlugRelatedField(
-        queryset=get_user_model().objects.filter(groups__name="support_team"),
-        slug_field="username",
-    )
+    # support_contact = serializers.SlugRelatedField(
+    #     queryset=get_user_model().objects.filter(groups__name="support_team"),
+    #     slug_field="username",
+    # )
     customer__last_name = serializers.ReadOnlyField(source="customer.last_name")
     customer__email = serializers.ReadOnlyField(source="customer.email")
     status = serializers.ReadOnlyField(source="status.name")
@@ -106,6 +99,7 @@ class EventListSerializer(ModelSerializer):
         fields = [
             "id",
             "support_contact",
+            "customer",
             "customer__last_name",
             "customer__email",
             "status",
@@ -123,7 +117,7 @@ class EventListSerializer(ModelSerializer):
 
 
 class EventDetailSerializer(ModelSerializer):
-    support_contact = serializers.ReadOnlyField(source="support_contact.username")
+    #support_contact = serializers.ReadOnlyField(source="support_contact.username")
 
     class Meta:
         model = Event

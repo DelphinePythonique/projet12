@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from crm.models import Customer, Contract, Event
+from .models import Customer, Contract, Event
 
 
 class CustomerListSerializer(ModelSerializer):
@@ -32,6 +32,8 @@ class CustomerListSerializer(ModelSerializer):
 
 
 class CustomerDetailSerializer(ModelSerializer):
+    sales_contact = serializers.ReadOnlyField(source="sales_contact.username")
+
     class Meta:
         model = Customer
         fields = [
@@ -77,6 +79,8 @@ class ContractListSerializer(ModelSerializer):
 
 
 class ContractDetailSerializer(ModelSerializer):
+    sales_contact = serializers.ReadOnlyField(source="sales_contact.username")
+
     class Meta:
         model = Contract
         fields = [
@@ -119,6 +123,8 @@ class EventListSerializer(ModelSerializer):
 
 
 class EventDetailSerializer(ModelSerializer):
+    support_contact = serializers.ReadOnlyField(source="support_contact.username")
+
     class Meta:
         model = Event
         fields = [

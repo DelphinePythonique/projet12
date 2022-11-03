@@ -11,7 +11,7 @@ from .permissions import (
     permissions_filter_on_contract,
     permissions_filter_on_event,
 )
-from .filters import TextFilter, NumericRangeFilter, DateRangeFilter
+from .admin_filters import TextFilter, NumericRangeFilter, DateRangeFilter
 
 User = get_user_model()
 

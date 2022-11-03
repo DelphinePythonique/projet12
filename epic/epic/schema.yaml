@@ -5,8 +5,6 @@ info:
 paths:
   /api/customer/:
     get:
-      security:
-        - bearerAuth: [ ]
       operationId: listCustomers
       description: Return the list of customers
       parameters:
@@ -63,8 +61,6 @@ paths:
       - customer
       - crm
     post:
-      security:
-        - bearerAuth: [ ]
       operationId: createCustomer
       description: add a customer.
       parameters: []
@@ -91,8 +87,6 @@ paths:
       - crm
   /api/customer/{id}/:
     get:
-      security:
-        - bearerAuth: [ ]
       operationId: retrieveCustomer
       description: Return a customer .
       parameters:
@@ -125,8 +119,6 @@ paths:
       - customer
       - crm
     put:
-      security:
-        - bearerAuth: [ ]
       operationId: updateCustomer
       description: update a customer
       parameters:
@@ -170,8 +162,6 @@ paths:
       - customer
       - crm
     patch:
-      security:
-        - bearerAuth: [ ]
       operationId: partialUpdateCustomer
       description: ''
       parameters:
@@ -215,8 +205,6 @@ paths:
       - customer
       - crm
     delete:
-      security:
-        - bearerAuth: [ ]
       operationId: destroyCustomer
       description: delete a customer
       parameters:
@@ -246,8 +234,6 @@ paths:
       - crm
   /api/contract/:
     get:
-      security:
-        - bearerAuth: [ ]
       operationId: listContracts
       description: Return the list of contracts
       parameters:
@@ -340,8 +326,6 @@ paths:
       - contract
       - crm
     post:
-      security:
-        - bearerAuth: [ ]
       operationId: createContract
       description: add a contract.
       parameters: []
@@ -368,8 +352,6 @@ paths:
       - crm
   /api/contract/{id}/:
     get:
-      security:
-        - bearerAuth: [ ]
       operationId: retrieveContract
       description: Return a contract .
       parameters:
@@ -438,8 +420,6 @@ paths:
       - contract
       - crm
     put:
-      security:
-        - bearerAuth: [ ]
       operationId: updateContract
       description: update a contract
       parameters:
@@ -519,8 +499,6 @@ paths:
       - contract
       - crm
     patch:
-      security:
-        - bearerAuth: [ ]
       operationId: partialUpdateContract
       description: ''
       parameters:
@@ -600,8 +578,6 @@ paths:
       - contract
       - crm
     delete:
-      security:
-        - bearerAuth: [ ]
       operationId: destroyContract
       description: delete a contract
       parameters:
@@ -667,8 +643,6 @@ paths:
       - crm
   /api/event/:
     get:
-      security:
-        - bearerAuth: [ ]
       operationId: listevents
       description: Return the list of events
       parameters:
@@ -743,8 +717,6 @@ paths:
       - event
       - crm
     post:
-      security:
-        - bearerAuth: [ ]
       operationId: createevent
       description: add an event.
       parameters: []
@@ -771,8 +743,6 @@ paths:
       - crm
   /api/event/{id}/:
     get:
-      security:
-        - bearerAuth: [ ]
       operationId: retrieveevent
       description: Return an event.
       parameters:
@@ -823,8 +793,6 @@ paths:
       - event
       - crm
     put:
-      security:
-        - bearerAuth: [ ]
       operationId: updateevent
       description: update an event.
       parameters:
@@ -886,8 +854,6 @@ paths:
       - event
       - crm
     patch:
-      security:
-        - bearerAuth: [ ]
       operationId: partialUpdateevent
       description: ''
       parameters:
@@ -949,8 +915,6 @@ paths:
       - event
       - crm
     delete:
-      security:
-        - bearerAuth: [ ]
       operationId: destroyevent
       description: delete an event.
       parameters:
@@ -1053,11 +1017,6 @@ paths:
       tags:
       - api
 components:
-  securitySchemes:
-    bearerAuth: # arbitrary name for the security scheme
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
   schemas:
     Customer:
       type: object

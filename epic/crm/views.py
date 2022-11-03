@@ -6,14 +6,14 @@ from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import GenericViewSet
 
-from crm.api.filters import CustomerFilter, ContractFilter, EventFilter
-from crm.permissions import (
+from .api_filters import CustomerFilter, ContractFilter, EventFilter
+from .permissions import (
     permissions_filter_on_customer,
     IsOwner,
     permissions_filter_on_contract,
     permissions_filter_on_event,
 )
-from crm.api.serializers import (
+from .serializers import (
     CustomerListSerializer,
     CustomerDetailSerializer,
     ContractDetailSerializer,
@@ -22,7 +22,7 @@ from crm.api.serializers import (
     EventDetailSerializer,
 )
 
-from crm.models import Customer, Contract, Event
+from .models import Customer, Contract, Event
 
 
 class CustomerViewset(
@@ -61,13 +61,22 @@ class CustomerViewset(
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = CustomerFilter
 
-    permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         customer_queryset_with_permissions = permissions_filter_on_customer(
             Customer.objects.all(), self.request
         )
         return customer_queryset_with_permissions
+
+    def get_permissions(self):
+        if self.action in ("update", "partial_update", "destroy"):
+            self.permission_classes = [IsAuthenticated, IsOwner]
+        elif self.action in ("list", "retrieve"):
+            self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
 
 
 class ContractViewset(
@@ -103,7 +112,7 @@ class ContractViewset(
     )
     serializer_class = ContractListSerializer
     detail_serializer_class = ContractDetailSerializer
-    permission_classes = [IsAuthenticated & (DjangoModelPermissions | IsOwner)]
+    permission_classes = [IsAuthenticated]
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ContractFilter
 
@@ -112,6 +121,18 @@ class ContractViewset(
             Contract.objects.all(), self.request
         )
         return contract_queryset_with_permissions
+
+    def get_permissions(self):
+        if self.action in ("update", "partial_update", "destroy"):
+            self.permission_classes = [IsAuthenticated, IsOwner]
+        elif self.action in ("list", "retrieve"):
+            self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
+
+    def perform_create(self, serializer):
+        serializer.save(sales_contact=self.request.user)
 
 
 class EventViewset(
@@ -157,3 +178,15 @@ class EventViewset(
             Event.objects.all(), self.request
         )
         return event_queryset_with_permissions
+
+    def get_permissions(self):
+        if self.action in ("update", "partial_update", "destroy"):
+            self.permission_classes = [IsAuthenticated, IsOwner]
+        elif self.action in ("list", "retrieve"):
+            self.permission_classes = [IsAuthenticated & DjangoModelPermissions]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
+
+    def perform_create(self, serializer):
+        serializer.save(support_contact=self.request.user)

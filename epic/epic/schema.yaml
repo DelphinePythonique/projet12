@@ -742,33 +742,6 @@ paths:
       tags:
       - event
       - crm
-    post:
-      security:
-        - bearerAuth: [ ]
-      operationId: createevent
-      description: add an event.
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/event'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/event'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/event'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/event'
-          description: ''
-      tags:
-      - event
-      - crm
   /api/event/{id}/:
     get:
       security:

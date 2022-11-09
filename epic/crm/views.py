@@ -137,9 +137,14 @@ class ContractViewset(
     def perform_create(self, serializer):
         serializer.save(sales_contact=self.request.user)
 
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        if instance.status == "S":
+            event = Event(customer=instance.customer)
+            event.save()
+
 
 class EventViewset(
-    mixins.CreateModelMixin,
     mixins.UpdateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,

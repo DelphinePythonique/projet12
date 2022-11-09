@@ -29,7 +29,7 @@ Position yourself in the local directory in which you want to position the sourc
 [ssh](https://docs.github.com/en/authentication/connecting-to-github-with-ssh), via la commande suivante
 
 ``` bash
- git clone git@github.com:DelphinePythonique/projet12.git
+ git clone https://github.com/DelphinePythonique/projet12.git
 ```
 
 - Position yourself in the project directory, create a virtual environment

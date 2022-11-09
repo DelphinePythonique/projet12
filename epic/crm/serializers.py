@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
@@ -117,7 +116,6 @@ class EventListSerializer(ModelSerializer):
 
 
 class EventDetailSerializer(ModelSerializer):
-    #support_contact = serializers.ReadOnlyField(source="support_contact.username")
 
     class Meta:
         model = Event

@@ -70,6 +70,12 @@ class ContractAdmin(admin.ModelAdmin):
             return allowed
         return is_change_authorized(request, obj)
 
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if obj.status == "S":
+            event = Event(customer=obj.customer)
+            event.save()
+
 
 admin.site.register(Contract, ContractAdmin)
 

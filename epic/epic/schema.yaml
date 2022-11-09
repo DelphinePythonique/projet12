@@ -1103,7 +1103,7 @@ components:
           type: string
         customer:
           type: integer
-          description: event  's customer
+          description: event's customer
         customer__last_name:
           type: string
           readOnly: true

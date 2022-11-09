@@ -1,0 +1,3601 @@
+{
+	"info": {
+		"_postman_id": "8257d1d7-f4b7-4e05-ac58-4e98f080be10",
+		"name": "EPIC api",
+		"description": "Api for EPIC Event Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "11542998-8257d1d7-f4b7-4e05-ac58-4e98f080be10"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "customer",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "retrieve Customer",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1beb306f-8496-49d3-a5ab-a7730a06b0dc",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "4c69f83e-2e2e-4f7d-884f-4b8187b9e256",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/customer/:id/?last_name=gold",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"customer",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "last_name",
+													"value": "gold",
+													"description": "last_name"
+												},
+												{
+													"key": "email",
+													"value": "eu laboris dolore",
+													"description": "email",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Return a customer ."
+									},
+									"response": [
+										{
+											"id": "55754e57-730c-49b0-81d5-f012555dfc1f",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "localhost:8000/api/customer/:id/?last_name=<string>&email=<string>",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"customer",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "email",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"email\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "update Customer",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "7cfe23d1-6936-45a2-8921-eea089202b6c",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "efb9589f-5c82-4335-9ced-2fd90dc0d4c8",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "simonupdate",
+													"description": "(Required) customer's firstname"
+												},
+												{
+													"key": "last_name",
+													"value": "<string>",
+													"description": "(Required) customer's lastname",
+													"disabled": true
+												},
+												{
+													"key": "sales_contact",
+													"value": "<string>",
+													"description": "(Required) ",
+													"disabled": true
+												},
+												{
+													"key": "email",
+													"value": "<string>",
+													"description": "customer's email",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/customer/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"customer",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "last_name",
+													"value": "eu laboris dolore",
+													"description": "last_name",
+													"disabled": true
+												},
+												{
+													"key": "email",
+													"value": "eu laboris dolore",
+													"description": "email",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "4",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "update a customer"
+									},
+									"response": [
+										{
+											"id": "7789dc03-2154-4c25-8ef6-0954c0405d0c",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) customer's firstname",
+															"key": "first_name",
+															"value": "<string>"
+														},
+														{
+															"description": "(Required) customer's lastname",
+															"key": "last_name",
+															"value": "<string>"
+														},
+														{
+															"description": "(Required) ",
+															"key": "sales_contact",
+															"value": "<string>"
+														},
+														{
+															"description": "customer's email",
+															"key": "email",
+															"value": "<string>",
+															"disabled": true
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/customer/:id/?last_name=<string>&email=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"customer",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "email",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"email\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "partial Update Customer",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "25541b3f-5955-4f29-9acd-49af2ba401d1",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "98973ccf-3bbc-47bc-8c90-07eb4f02ece6",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "first_name",
+													"value": "client gold +++",
+													"description": "(Required) customer's firstname"
+												},
+												{
+													"key": "last_name",
+													"value": "<string>",
+													"description": "(Required) customer's lastname",
+													"disabled": true
+												},
+												{
+													"key": "sales_contact",
+													"value": "<string>",
+													"description": "(Required) ",
+													"disabled": true
+												},
+												{
+													"key": "email",
+													"value": "michel@goldplusplusplus.fr",
+													"description": "customer's email"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/customer/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"customer",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "last_name",
+													"value": "eu laboris dolore",
+													"description": "last_name",
+													"disabled": true
+												},
+												{
+													"key": "email",
+													"value": "eu laboris dolore",
+													"description": "email",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "11",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "76d5da6f-f5d2-4cc4-a668-4a5a6b4ef6cb",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) customer's firstname",
+															"key": "first_name",
+															"value": "<string>"
+														},
+														{
+															"description": "(Required) customer's lastname",
+															"key": "last_name",
+															"value": "<string>"
+														},
+														{
+															"description": "(Required) ",
+															"key": "sales_contact",
+															"value": "<string>"
+														},
+														{
+															"description": "customer's email",
+															"key": "email",
+															"value": "<string>",
+															"disabled": true
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/customer/:id/?last_name=<string>&email=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"customer",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "email",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"email\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "destroy Customer",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b573422-b2c9-4ef2-8637-2e502fc684a0",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "80f4d68f-8db2-40a9-b3ea-07b617318d95",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/customer/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"customer",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "last_name",
+													"value": "eu laboris dolore",
+													"description": "last_name",
+													"disabled": true
+												},
+												{
+													"key": "email",
+													"value": "eu laboris dolore",
+													"description": "email",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "10",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "delete a customer"
+									},
+									"response": [
+										{
+											"id": "008cf609-0ae1-44ca-8c61-65aad8d48be8",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/customer/:id/?last_name=<string>&email=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"customer",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "email",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"id": "05e65b95-ea47-4f8a-adb5-7bdf10f4952e"
+						},
+						{
+							"name": "list Customers",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "54fe358f-f029-4cd1-b7c1-3fb9201142e7",
+										"exec": [
+											"const echoPostRequest = {",
+											"  url: 'http://localhost:8000/api/login/',",
+											"  method: 'POST',",
+											"  header: 'Content-Type:application/json',",
+											"  body: {",
+											"    mode: 'application/json',",
+											"    raw: JSON.stringify(",
+											"        {",
+											"            username: pm.environment.get(\"username\"),",
+											"        \tpassword: pm.environment.get(\"password\"),",
+											"        })",
+											"  }",
+											"};",
+											"",
+											"var getToken = true;",
+											"",
+											"if (getToken === true) {",
+											"    pm.sendRequest(echoPostRequest, function (err, res) {",
+											"    console.log(err ? err : res.json());",
+											"        if (err === null) {",
+											"            console.log('Saving the token and expiry date')",
+											"            var responseJson = res.json();",
+											"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+											"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+											"",
+											"        }",
+											"    });",
+											"}",
+											"console.log(\"coucou\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "005bbe38-26c5-46ef-9b1c-6d2dc869b470",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/customer/?limit=20&offset=0&last_name=Premiere",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"customer",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20",
+											"description": "Number of results to return per page."
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"description": "The initial index from which to return the results."
+										},
+										{
+											"key": "last_name",
+											"value": "Premiere",
+											"description": "last_name"
+										},
+										{
+											"key": "email",
+											"value": "eu laboris dolore",
+											"description": "email",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Return the list of customers"
+							},
+							"response": [
+								{
+									"id": "b3e64828-bd98-4ab9-91c9-787af7e089ad",
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/customer/?limit=<integer>&offset=<integer>&last_name=<string>&email=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"customer",
+												""
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "last_name",
+													"value": "<string>"
+												},
+												{
+													"key": "email",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\",\n  \"results\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"sales_contact\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"email\": \"<string>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"sales_contact\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"email\": \"<string>\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "create Customer",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d1e713cd-f96e-492b-9cb1-98e802882d31",
+										"exec": [
+											" const echoPostRequest = {",
+											"  url: 'http://localhost:8000/api/login/',",
+											"  method: 'POST',",
+											"  header: 'Content-Type:application/json',",
+											"  body: {",
+											"    mode: 'application/json',",
+											"    raw: JSON.stringify(",
+											"        {",
+											"            username: pm.environment.get(\"username\"),",
+											"        \tpassword: pm.environment.get(\"password\"),",
+											"        })",
+											"  }",
+											"};",
+											"",
+											"var getToken = true;",
+											"",
+											"if (getToken === true) {",
+											"    pm.sendRequest(echoPostRequest, function (err, res) {",
+											"    console.log(err ? err : res.json());",
+											"        if (err === null) {",
+											"            console.log('Saving the token and expiry date')",
+											"            var responseJson = res.json();",
+											"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+											"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+											"",
+											"        }",
+											"    });",
+											"}",
+											"console.log(\"coucou\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "46ade711-5a56-4ced-938d-30393bad18e4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "first_name",
+											"value": "verif",
+											"description": "(Required) customer's firstname"
+										},
+										{
+											"key": "last_name",
+											"value": "verif2",
+											"description": "(Required) customer's lastname"
+										},
+										{
+											"key": "sales_contact",
+											"value": "<string>",
+											"description": "(Required) ",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "michel@verif.fr",
+											"description": "customer's email"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/customer/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"customer",
+										""
+									]
+								},
+								"description": "add a customer."
+							},
+							"response": [
+								{
+									"id": "36c327d3-ffc2-4c09-9fd7-e142cd02c589",
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"description": "(Required) customer's firstname",
+													"key": "first_name",
+													"value": "<string>"
+												},
+												{
+													"description": "(Required) customer's lastname",
+													"key": "last_name",
+													"value": "<string>"
+												},
+												{
+													"description": "(Required) ",
+													"key": "sales_contact",
+													"value": "<string>"
+												},
+												{
+													"description": "customer's email",
+													"key": "email",
+													"value": "<string>",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/customer/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"customer",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"email\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "a1fdcc11-7928-48a1-bc62-4a97a811ac28"
+				},
+				{
+					"name": "contract",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "retrieve Contract",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "13a4601e-8e69-4247-b37b-f7b7ed154af8",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "ecd118c6-a4ba-4bf9-a528-9052a1b69c69",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/contract/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"contract",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "date_created",
+													"value": "eu laboris dolore",
+													"description": "date_created",
+													"disabled": true
+												},
+												{
+													"key": "amount",
+													"value": "eu laboris dolore",
+													"description": "amount",
+													"disabled": true
+												},
+												{
+													"key": "amount__gt",
+													"value": "eu laboris dolore",
+													"description": "amount__gt",
+													"disabled": true
+												},
+												{
+													"key": "amount__lt",
+													"value": "eu laboris dolore",
+													"description": "amount__lt",
+													"disabled": true
+												},
+												{
+													"key": "date_created__gte",
+													"value": "eu laboris dolore",
+													"description": "date_created__gte",
+													"disabled": true
+												},
+												{
+													"key": "date_created__lte",
+													"value": "eu laboris dolore",
+													"description": "date_created__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "eu laboris dolore",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Return a contract ."
+									},
+									"response": [
+										{
+											"id": "8447c88e-5fe0-44b2-b76e-757e531ec911",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/contract/:id/?customer__last_name=<string>&customer__email=<string>&date_created=<string>&amount=<string>&amount__gt=<string>&amount__lt=<string>&date_created__gte=<string>&date_created__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"contract",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created",
+															"value": "<string>"
+														},
+														{
+															"key": "amount",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__gt",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__lt",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"customer\": \"<integer>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"customer_lastname\": \"<string>\",\n  \"status\": \"<string>\",\n  \"status_name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"payment_due\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "update Contract",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "3d892cfb-346d-4f37-aa0c-540c1e99aa8f",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "f966df34-c840-4e42-b384-546c4470c587",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "customer",
+													"value": "14",
+													"description": "(Required) contract's customer"
+												},
+												{
+													"key": "sales_contact",
+													"value": "<string>",
+													"description": "(Required) ",
+													"disabled": true
+												},
+												{
+													"key": "status",
+													"value": "S",
+													"description": "This field is used to categorize the project. Use, S=>Sign, QS=>Quote sent, P=>In progress"
+												},
+												{
+													"key": "amount",
+													"value": "<number>",
+													"description": "contract's amount",
+													"disabled": true
+												},
+												{
+													"key": "payment_due",
+													"value": "<dateTime>",
+													"description": "contract's paiement due date",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/contract/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"contract",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "date_created",
+													"value": "eu laboris dolore",
+													"description": "date_created",
+													"disabled": true
+												},
+												{
+													"key": "amount",
+													"value": "eu laboris dolore",
+													"description": "amount",
+													"disabled": true
+												},
+												{
+													"key": "amount__gt",
+													"value": "eu laboris dolore",
+													"description": "amount__gt",
+													"disabled": true
+												},
+												{
+													"key": "amount__lt",
+													"value": "eu laboris dolore",
+													"description": "amount__lt",
+													"disabled": true
+												},
+												{
+													"key": "date_created__gte",
+													"value": "eu laboris dolore",
+													"description": "date_created__gte",
+													"disabled": true
+												},
+												{
+													"key": "date_created__lte",
+													"value": "eu laboris dolore",
+													"description": "date_created__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "10",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "update a contract"
+									},
+									"response": [
+										{
+											"id": "13af3cfd-5693-4fa7-a2ed-0faa89fbf5ea",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) contract's customer",
+															"key": "customer",
+															"value": "<integer>"
+														},
+														{
+															"description": "(Required) ",
+															"key": "sales_contact",
+															"value": "<string>"
+														},
+														{
+															"description": "This field is used to categorize the project. Use, S=>Sign, QS=>Quote sent, P=>In progress",
+															"key": "status",
+															"value": "<string>",
+															"disabled": true
+														},
+														{
+															"description": "contract's amount",
+															"key": "amount",
+															"value": "<number>",
+															"disabled": true
+														},
+														{
+															"description": "contract's paiement due date",
+															"key": "payment_due",
+															"value": "<dateTime>",
+															"disabled": true
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/contract/:id/?customer__last_name=<string>&customer__email=<string>&date_created=<string>&amount=<string>&amount__gt=<string>&amount__lt=<string>&date_created__gte=<string>&date_created__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"contract",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created",
+															"value": "<string>"
+														},
+														{
+															"key": "amount",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__gt",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__lt",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"customer\": \"<integer>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"customer_lastname\": \"<string>\",\n  \"status\": \"<string>\",\n  \"status_name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"payment_due\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "partial Update Contract",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "942ec0f2-96c6-4577-857e-8a3b29f6149b",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "bcdafa88-ac4b-4d67-bc7e-b07b2f01124b",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "customer",
+													"value": "<integer>",
+													"description": "(Required) contract's customer",
+													"disabled": true
+												},
+												{
+													"key": "sales_contact",
+													"value": "<string>",
+													"description": "(Required) ",
+													"disabled": true
+												},
+												{
+													"key": "status",
+													"value": "<string>",
+													"description": "This field is used to categorize the project. Use, S=>Sign, QS=>Quote sent, P=>In progress",
+													"disabled": true
+												},
+												{
+													"key": "amount",
+													"value": "4000",
+													"description": "contract's amount"
+												},
+												{
+													"key": "payment_due",
+													"value": "<dateTime>",
+													"description": "contract's paiement due date",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/contract/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"contract",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "date_created",
+													"value": "eu laboris dolore",
+													"description": "date_created",
+													"disabled": true
+												},
+												{
+													"key": "amount",
+													"value": "eu laboris dolore",
+													"description": "amount",
+													"disabled": true
+												},
+												{
+													"key": "amount__gt",
+													"value": "eu laboris dolore",
+													"description": "amount__gt",
+													"disabled": true
+												},
+												{
+													"key": "amount__lt",
+													"value": "eu laboris dolore",
+													"description": "amount__lt",
+													"disabled": true
+												},
+												{
+													"key": "date_created__gte",
+													"value": "eu laboris dolore",
+													"description": "date_created__gte",
+													"disabled": true
+												},
+												{
+													"key": "date_created__lte",
+													"value": "eu laboris dolore",
+													"description": "date_created__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "29107a6d-c3f8-4ba9-8ac2-995e26e66dea",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) contract's customer",
+															"key": "customer",
+															"value": "<integer>"
+														},
+														{
+															"description": "(Required) ",
+															"key": "sales_contact",
+															"value": "<string>"
+														},
+														{
+															"description": "This field is used to categorize the project. Use, S=>Sign, QS=>Quote sent, P=>In progress",
+															"key": "status",
+															"value": "<string>",
+															"disabled": true
+														},
+														{
+															"description": "contract's amount",
+															"key": "amount",
+															"value": "<number>",
+															"disabled": true
+														},
+														{
+															"description": "contract's paiement due date",
+															"key": "payment_due",
+															"value": "<dateTime>",
+															"disabled": true
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/contract/:id/?customer__last_name=<string>&customer__email=<string>&date_created=<string>&amount=<string>&amount__gt=<string>&amount__lt=<string>&date_created__gte=<string>&date_created__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"contract",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created",
+															"value": "<string>"
+														},
+														{
+															"key": "amount",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__gt",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__lt",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"customer\": \"<integer>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"customer_lastname\": \"<string>\",\n  \"status\": \"<string>\",\n  \"status_name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"payment_due\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "destroy Contract",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "dfd9f1c9-3ede-4a66-8efe-28a98f9d5a37",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "5e803299-f06e-4fcc-ac8c-0ae0f3c26678",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/contract/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"contract",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "date_created",
+													"value": "eu laboris dolore",
+													"description": "date_created",
+													"disabled": true
+												},
+												{
+													"key": "amount",
+													"value": "eu laboris dolore",
+													"description": "amount",
+													"disabled": true
+												},
+												{
+													"key": "amount__gt",
+													"value": "eu laboris dolore",
+													"description": "amount__gt",
+													"disabled": true
+												},
+												{
+													"key": "amount__lt",
+													"value": "eu laboris dolore",
+													"description": "amount__lt",
+													"disabled": true
+												},
+												{
+													"key": "date_created__gte",
+													"value": "eu laboris dolore",
+													"description": "date_created__gte",
+													"disabled": true
+												},
+												{
+													"key": "date_created__lte",
+													"value": "eu laboris dolore",
+													"description": "date_created__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "eu laboris dolore",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "delete a contract"
+									},
+									"response": [
+										{
+											"id": "f41464bf-b6df-4152-8496-e23a9df7d02d",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/contract/:id/?customer__last_name=<string>&customer__email=<string>&date_created=<string>&amount=<string>&amount__gt=<string>&amount__lt=<string>&date_created__gte=<string>&date_created__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"contract",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created",
+															"value": "<string>"
+														},
+														{
+															"key": "amount",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__gt",
+															"value": "<string>"
+														},
+														{
+															"key": "amount__lt",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "date_created__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"id": "84b66052-d936-44d0-a6a9-a73150bf0a7e"
+						},
+						{
+							"name": "list Contracts",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d4aba1da-1159-491f-9c31-3a4f2dd77a00",
+										"exec": [
+											"const echoPostRequest = {",
+											"  url: 'http://localhost:8000/api/login/',",
+											"  method: 'POST',",
+											"  header: 'Content-Type:application/json',",
+											"  body: {",
+											"    mode: 'application/json',",
+											"    raw: JSON.stringify(",
+											"        {",
+											"            username: pm.environment.get(\"username\"),",
+											"        \tpassword: pm.environment.get(\"password\"),",
+											"        })",
+											"  }",
+											"};",
+											"",
+											"var getToken = true;",
+											"",
+											"if (getToken === true) {",
+											"    pm.sendRequest(echoPostRequest, function (err, res) {",
+											"    console.log(err ? err : res.json());",
+											"        if (err === null) {",
+											"            console.log('Saving the token and expiry date')",
+											"            var responseJson = res.json();",
+											"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+											"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+											"",
+											"        }",
+											"    });",
+											"}",
+											"console.log(\"coucou\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "6feb57b2-b936-4a26-b057-b16e43751053",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/contract/?limit=20&offset=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"contract",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20",
+											"description": "Number of results to return per page."
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"description": "The initial index from which to return the results."
+										},
+										{
+											"key": "customer__last_name",
+											"value": "eu laboris dolore",
+											"description": "customer__last_name",
+											"disabled": true
+										},
+										{
+											"key": "customer__email",
+											"value": "eu laboris dolore",
+											"description": "customer__email",
+											"disabled": true
+										},
+										{
+											"key": "date_created",
+											"value": "eu laboris dolore",
+											"description": "date_created",
+											"disabled": true
+										},
+										{
+											"key": "amount",
+											"value": "eu laboris dolore",
+											"description": "amount",
+											"disabled": true
+										},
+										{
+											"key": "amount__gt",
+											"value": "1000",
+											"description": "amount__gt",
+											"disabled": true
+										},
+										{
+											"key": "amount__lt",
+											"value": "2000",
+											"description": "amount__lt",
+											"disabled": true
+										},
+										{
+											"key": "date_created__gte",
+											"value": "eu laboris dolore",
+											"description": "date_created__gte",
+											"disabled": true
+										},
+										{
+											"key": "date_created__lte",
+											"value": "eu laboris dolore",
+											"description": "date_created__lte",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Return the list of contracts"
+							},
+							"response": [
+								{
+									"id": "5c247b39-21cd-4701-8f73-3c9e3dd273b5",
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/contract/?limit=<integer>&offset=<integer>&customer__last_name=<string>&customer__email=<string>&date_created=<string>&amount=<string>&amount__gt=<string>&amount__lt=<string>&date_created__gte=<string>&date_created__lte=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"contract",
+												""
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "customer__last_name",
+													"value": "<string>"
+												},
+												{
+													"key": "customer__email",
+													"value": "<string>"
+												},
+												{
+													"key": "date_created",
+													"value": "<string>"
+												},
+												{
+													"key": "amount",
+													"value": "<string>"
+												},
+												{
+													"key": "amount__gt",
+													"value": "<string>"
+												},
+												{
+													"key": "amount__lt",
+													"value": "<string>"
+												},
+												{
+													"key": "date_created__gte",
+													"value": "<string>"
+												},
+												{
+													"key": "date_created__lte",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\",\n  \"results\": [\n    {\n      \"customer\": \"<integer>\",\n      \"sales_contact\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"customer_lastname\": \"<string>\",\n      \"status\": \"<string>\",\n      \"status_name\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"payment_due\": \"<dateTime>\"\n    },\n    {\n      \"customer\": \"<integer>\",\n      \"sales_contact\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"customer_lastname\": \"<string>\",\n      \"status\": \"<string>\",\n      \"status_name\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"payment_due\": \"<dateTime>\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "create Contract",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e7333293-1ba4-44c5-be76-4ae691e9e553",
+										"exec": [
+											"const echoPostRequest = {",
+											"  url: 'http://localhost:8000/api/login/',",
+											"  method: 'POST',",
+											"  header: 'Content-Type:application/json',",
+											"  body: {",
+											"    mode: 'application/json',",
+											"    raw: JSON.stringify(",
+											"        {",
+											"            username: pm.environment.get(\"username\"),",
+											"        \tpassword: pm.environment.get(\"password\"),",
+											"        })",
+											"  }",
+											"};",
+											"",
+											"var getToken = true;",
+											"",
+											"if (getToken === true) {",
+											"    pm.sendRequest(echoPostRequest, function (err, res) {",
+											"    console.log(err ? err : res.json());",
+											"        if (err === null) {",
+											"            console.log('Saving the token and expiry date')",
+											"            var responseJson = res.json();",
+											"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+											"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+											"",
+											"        }",
+											"    });",
+											"}",
+											"console.log(\"coucou\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "2a1b1aec-2e35-430c-a18b-b9b6342b2bc9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "customer",
+											"value": "14",
+											"description": "(Required) contract's customer"
+										},
+										{
+											"key": "sales_contact",
+											"value": "<string>",
+											"description": "(Required) ",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "<string>",
+											"description": "This field is used to categorize the project. Use, S=>Sign, QS=>Quote sent, P=>In progress",
+											"disabled": true
+										},
+										{
+											"key": "amount",
+											"value": "2000",
+											"description": "contract's amount"
+										},
+										{
+											"key": "payment_due",
+											"value": "2022-10-24T10:41:09Z",
+											"description": "contract's paiement due date"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/contract/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"contract",
+										""
+									]
+								},
+								"description": "add a contract."
+							},
+							"response": [
+								{
+									"id": "d10bef56-9dd3-423e-8724-57b7954c600b",
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"description": "(Required) contract's customer",
+													"key": "customer",
+													"value": "<integer>"
+												},
+												{
+													"description": "(Required) ",
+													"key": "sales_contact",
+													"value": "<string>"
+												},
+												{
+													"description": "This field is used to categorize the project. Use, S=>Sign, QS=>Quote sent, P=>In progress",
+													"key": "status",
+													"value": "<string>",
+													"disabled": true
+												},
+												{
+													"description": "contract's amount",
+													"key": "amount",
+													"value": "<number>",
+													"disabled": true
+												},
+												{
+													"description": "contract's paiement due date",
+													"key": "payment_due",
+													"value": "<dateTime>",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/contract/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"contract",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"customer\": \"<integer>\",\n  \"sales_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"customer_lastname\": \"<string>\",\n  \"status\": \"<string>\",\n  \"status_name\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"payment_due\": \"<dateTime>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "f601f438-bfc2-4c12-8817-82aeb200ada4"
+				},
+				{
+					"name": "event",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "retrieveevent",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "bc1313ed-73bd-4da4-beb2-43391b6091aa",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "f4ac659f-03fe-4a10-918a-80072cad1d34",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/event/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"event",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "event_date",
+													"value": "eu laboris dolore",
+													"description": "event_date",
+													"disabled": true
+												},
+												{
+													"key": "event_date__gte",
+													"value": "eu laboris dolore",
+													"description": "event_date__gte",
+													"disabled": true
+												},
+												{
+													"key": "event_date__lte",
+													"value": "eu laboris dolore",
+													"description": "event_date__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "6",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Return an event."
+									},
+									"response": [
+										{
+											"id": "22977aae-b8cc-4d56-87d2-7c3cabd2e3fc",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/event/:id/?customer__last_name=<string>&customer__email=<string>&event_date=<string>&event_date__gte=<string>&event_date__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"event",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"support_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"customer__last_name\": \"<string>\",\n  \"customer__email\": \"<string>\",\n  \"status\": \"<string>\",\n  \"attendees\": \"<integer>\",\n  \"event_date\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "updateevent",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "20ec40ce-7dcc-4794-b469-99334de20cc5",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "8f84fb40-91fa-45ae-96dd-8b20c611a613",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "support_contact",
+													"value": "<string>",
+													"description": "(Required) ",
+													"disabled": true
+												},
+												{
+													"key": "attendees",
+													"value": "<integer>",
+													"description": "event's number of attendees",
+													"disabled": true
+												},
+												{
+													"key": "event_date",
+													"value": "<dateTime>",
+													"description": "event's date",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/event/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"event",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "event_date",
+													"value": "eu laboris dolore",
+													"description": "event_date",
+													"disabled": true
+												},
+												{
+													"key": "event_date__gte",
+													"value": "eu laboris dolore",
+													"description": "event_date__gte",
+													"disabled": true
+												},
+												{
+													"key": "event_date__lte",
+													"value": "eu laboris dolore",
+													"description": "event_date__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "8",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "update an event."
+									},
+									"response": [
+										{
+											"id": "e2f513c1-ace6-4274-98bf-2df98e9b60bd",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "support_contact",
+															"value": "<string>"
+														},
+														{
+															"description": "event's number of attendees",
+															"key": "attendees",
+															"value": "<integer>",
+															"disabled": true
+														},
+														{
+															"description": "event's date",
+															"key": "event_date",
+															"value": "<dateTime>",
+															"disabled": true
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/event/:id/?customer__last_name=<string>&customer__email=<string>&event_date=<string>&event_date__gte=<string>&event_date__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"event",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"support_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"customer__last_name\": \"<string>\",\n  \"customer__email\": \"<string>\",\n  \"status\": \"<string>\",\n  \"attendees\": \"<integer>\",\n  \"event_date\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "partial Updateevent",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "0ecdb7b6-a8df-4755-ac10-7ff2c1d5f478",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "c308c4f1-c7a9-4298-8e29-7a7c9a318727",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "support_contact",
+													"value": "<string>",
+													"description": "(Required) ",
+													"disabled": true
+												},
+												{
+													"key": "attendees",
+													"value": "152",
+													"description": "event's number of attendees"
+												},
+												{
+													"key": "event_date",
+													"value": "2022-10-24T10:41:01Z",
+													"description": "event's date",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/event/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"event",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "event_date",
+													"value": "eu laboris dolore",
+													"description": "event_date",
+													"disabled": true
+												},
+												{
+													"key": "event_date__gte",
+													"value": "eu laboris dolore",
+													"description": "event_date__gte",
+													"disabled": true
+												},
+												{
+													"key": "event_date__lte",
+													"value": "eu laboris dolore",
+													"description": "event_date__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "6",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "affd6384-867b-4043-883b-9bd0a4d3b874",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"description": "(Required) ",
+															"key": "support_contact",
+															"value": "<string>"
+														},
+														{
+															"description": "event's number of attendees",
+															"key": "attendees",
+															"value": "<integer>",
+															"disabled": true
+														},
+														{
+															"description": "event's date",
+															"key": "event_date",
+															"value": "<dateTime>",
+															"disabled": true
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/event/:id/?customer__last_name=<string>&customer__email=<string>&event_date=<string>&event_date__gte=<string>&event_date__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"event",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"support_contact\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"customer__last_name\": \"<string>\",\n  \"customer__email\": \"<string>\",\n  \"status\": \"<string>\",\n  \"attendees\": \"<integer>\",\n  \"event_date\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "destroyevent",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "8a671b16-e5b8-48e0-aa76-82986cef0338",
+												"exec": [
+													"const echoPostRequest = {",
+													"  url: 'http://localhost:8000/api/login/',",
+													"  method: 'POST',",
+													"  header: 'Content-Type:application/json',",
+													"  body: {",
+													"    mode: 'application/json',",
+													"    raw: JSON.stringify(",
+													"        {",
+													"            username: pm.environment.get(\"username\"),",
+													"        \tpassword: pm.environment.get(\"password\"),",
+													"        })",
+													"  }",
+													"};",
+													"",
+													"var getToken = true;",
+													"",
+													"if (getToken === true) {",
+													"    pm.sendRequest(echoPostRequest, function (err, res) {",
+													"    console.log(err ? err : res.json());",
+													"        if (err === null) {",
+													"            console.log('Saving the token and expiry date')",
+													"            var responseJson = res.json();",
+													"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+													"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+													"",
+													"        }",
+													"    });",
+													"}",
+													"console.log(\"coucou\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "85183be9-237f-459a-8ef5-b85e70d7382c",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/event/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"event",
+												":id",
+												""
+											],
+											"query": [
+												{
+													"key": "customer__last_name",
+													"value": "eu laboris dolore",
+													"description": "customer__last_name",
+													"disabled": true
+												},
+												{
+													"key": "customer__email",
+													"value": "eu laboris dolore",
+													"description": "customer__email",
+													"disabled": true
+												},
+												{
+													"key": "event_date",
+													"value": "eu laboris dolore",
+													"description": "event_date",
+													"disabled": true
+												},
+												{
+													"key": "event_date__gte",
+													"value": "eu laboris dolore",
+													"description": "event_date__gte",
+													"disabled": true
+												},
+												{
+													"key": "event_date__lte",
+													"value": "eu laboris dolore",
+													"description": "event_date__lte",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "5",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "delete an event."
+									},
+									"response": [
+										{
+											"id": "94345f6f-a13c-43a0-9b12-eb3d87859f37",
+											"name": "Untitled Example",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/event/:id/?customer__last_name=<string>&customer__email=<string>&event_date=<string>&event_date__gte=<string>&event_date__lte=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"event",
+														":id",
+														""
+													],
+													"query": [
+														{
+															"key": "customer__last_name",
+															"value": "<string>"
+														},
+														{
+															"key": "customer__email",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__gte",
+															"value": "<string>"
+														},
+														{
+															"key": "event_date__lte",
+															"value": "<string>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "eu laboris dolore",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"id": "e5e44149-5520-4478-a7fc-a25d9795b08e"
+						},
+						{
+							"name": "listevents",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d7a804bc-74e5-4dca-87e0-17449e5774e7",
+										"exec": [
+											"const echoPostRequest = {",
+											"  url: 'http://localhost:8000/api/login/',",
+											"  method: 'POST',",
+											"  header: 'Content-Type:application/json',",
+											"  body: {",
+											"    mode: 'application/json',",
+											"    raw: JSON.stringify(",
+											"        {",
+											"            username: pm.environment.get(\"username\"),",
+											"        \tpassword: pm.environment.get(\"password\"),",
+											"        })",
+											"  }",
+											"};",
+											"",
+											"var getToken = true;",
+											"",
+											"if (getToken === true) {",
+											"    pm.sendRequest(echoPostRequest, function (err, res) {",
+											"    console.log(err ? err : res.json());",
+											"        if (err === null) {",
+											"            console.log('Saving the token and expiry date')",
+											"            var responseJson = res.json();",
+											"            pm.environment.set('JWT_TOKEN',responseJson.access)",
+											"            pm.environment.set('JWT_REFRESH',responseJson.refresh)",
+											"",
+											"        }",
+											"    });",
+											"}",
+											"console.log(\"coucou\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "d327c83f-e240-4725-a209-87ea368c4449",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/event/?limit=20&offset=0&customer__last_name=verif2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"event",
+										""
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20",
+											"description": "Number of results to return per page."
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"description": "The initial index from which to return the results."
+										},
+										{
+											"key": "customer__last_name",
+											"value": "verif2",
+											"description": "customer__last_name"
+										},
+										{
+											"key": "customer__email",
+											"value": "michel@verif.fr",
+											"description": "customer__email",
+											"disabled": true
+										},
+										{
+											"key": "event_date",
+											"value": "eu laboris dolore",
+											"description": "event_date",
+											"disabled": true
+										},
+										{
+											"key": "event_date__gte",
+											"value": "eu laboris dolore",
+											"description": "event_date__gte",
+											"disabled": true
+										},
+										{
+											"key": "event_date__lte",
+											"value": "eu laboris dolore",
+											"description": "event_date__lte",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Return the list of events"
+							},
+							"response": [
+								{
+									"id": "f39baedc-dd8d-448c-b92b-c56a9439b444",
+									"name": "Untitled Example",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/event/?limit=<integer>&offset=<integer>&customer__last_name=<string>&customer__email=<string>&event_date=<string>&event_date__gte=<string>&event_date__lte=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"event",
+												""
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "customer__last_name",
+													"value": "<string>"
+												},
+												{
+													"key": "customer__email",
+													"value": "<string>"
+												},
+												{
+													"key": "event_date",
+													"value": "<string>"
+												},
+												{
+													"key": "event_date__gte",
+													"value": "<string>"
+												},
+												{
+													"key": "event_date__lte",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\",\n  \"results\": [\n    {\n      \"support_contact\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"customer__last_name\": \"<string>\",\n      \"customer__email\": \"<string>\",\n      \"status\": \"<string>\",\n      \"attendees\": \"<integer>\",\n      \"event_date\": \"<dateTime>\"\n    },\n    {\n      \"support_contact\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"customer__last_name\": \"<string>\",\n      \"customer__email\": \"<string>\",\n      \"status\": \"<string>\",\n      \"attendees\": \"<integer>\",\n      \"event_date\": \"<dateTime>\"\n    }\n  ]\n}"
+								}
+							]
+						}
+					],
+					"id": "b9f66c05-9819-41c9-8bfb-17cb069e7046"
+				},
+				{
+					"name": "create Token Refresh",
+					"id": "96de5c8c-a4d5-4f95-95bf-59e141495531",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh",
+									"value": "esse eiusmod",
+									"description": "(Required) "
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/token/refresh/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"token",
+								"refresh",
+								""
+							]
+						},
+						"description": "Takes a refresh type JSON web token and returns an access type JSON web\ntoken if the refresh token is valid."
+					},
+					"response": [
+						{
+							"id": "2ec09423-dbb9-4cb4-a7a2-408c10eb62f9",
+							"name": "Untitled Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"description": "(Required) ",
+											"key": "refresh",
+											"value": "<string>"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/token/refresh/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"token",
+										"refresh",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"refresh\": \"<string>\",\n  \"access\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "create Token Obtain Pair",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5733a43e-89c2-4550-8b50-979003f666a9",
+								"exec": [
+									"var jsonDataToken = pm.response.json().access;",
+									"pm.environment.set(\"JWT_TOKEN\", jsonDataToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "06f49b91-e74c-4da7-92b4-597f04ff9f44",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{username}}"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"description": "(Required) "
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						},
+						"description": "Takes a set of user credentials and returns an access and refresh JSON web\ntoken pair to prove the authentication of those credentials."
+					},
+					"response": [
+						{
+							"id": "8c811329-dcc0-434e-845c-4008b77e0f63",
+							"name": "Untitled Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"description": "(Required) ",
+											"key": "username",
+											"value": "<string>"
+										},
+										{
+											"description": "(Required) ",
+											"key": "password",
+											"value": "<string>"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/login/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"username\": \"<string>\"\n}"
+						}
+					]
+				}
+			],
+			"id": "8c2b764d-f21a-45a6-8bf7-5327fcf0cac3"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JWT_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ec42fec8-8d2d-4cf2-b718-f81ddc37bbbc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3a02ba3a-2dc6-4f59-927a-94b44a666971",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "947fcbe4-3327-4d70-9dc9-8258a195e578",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}

@@ -29,7 +29,7 @@ Position yourself in the local directory in which you want to position the sourc
 [ssh](https://docs.github.com/en/authentication/connecting-to-github-with-ssh), via la commande suivante
 
 ``` bash
- git clone https://github.com/DelphinePythonique/projet12.git
+git@github.com:DelphinePythonique/projet12.git
 ```
 
 - Position yourself in the project directory, create a virtual environment
@@ -109,4 +109,4 @@ python manage.py generateschema  --file project/schema.yaml --title "EPIC Api"
 
 ### <a name="use"></a>Uses
 
-[API documentation](https://documenter.getpostman.com/view/11542998/VUjHMTZh)
+[API documentation](https://documenter.getpostman.com/view/11542998/2s8YeixGCM)
